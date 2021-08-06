@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar-brand {
+  font-family: Mulish;
+  padding-left: 20px;
+  font-weight: 700;
+}
+
+.transaction-row {
+  background-color: aliceblue;
+}
+
+tr {
+  margin-bottom: 5em;
+  border-width: 0.75em;
+  border-color: white;
+}
+
+.dropdown-menu {
+  height: 70px;
+  overflow-y: scroll;
+}
