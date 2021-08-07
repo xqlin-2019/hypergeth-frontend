@@ -43,6 +43,11 @@
   font-weight: 700;
 }
 
+#status{
+  width: 71.56px;
+  height: 30.21px;
+} 
+
 .transaction-row {
   background-color: aliceblue;
 }
@@ -51,6 +56,10 @@ tr {
   margin-bottom: 5em;
   border-width: 0.75em;
   border-color: white;
+}
+
+td {
+  vertical-align: middle;
 }
 
 .dropdown-menu {

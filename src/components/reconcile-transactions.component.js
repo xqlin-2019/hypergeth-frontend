@@ -158,7 +158,11 @@ export default class ReconcileTransactions extends Component {
                 {reconcile_transactions && 
                     reconcile_transactions.map((transaction) => (
                         <tr class="transaction-row ">
-                            <th scope="row">{transaction.reconcile_status}</th>
+                            {/* <th scope="row">{transaction.reconcile_status}</th> */}
+                            <div>
+                            {transaction.reconcile_status == 'fail' ? null : <button type="button" class="btn btn-success btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            {transaction.reconcile_status == 'success' ? null : <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            </div>
                             <td class="col">
                               <Link to={"/transaction/" + transaction.recon_id} className="link">
                               {transaction.recon_id}

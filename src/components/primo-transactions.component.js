@@ -215,7 +215,10 @@ export default class PrimoTransactions extends Component {
                 {primo_transactions && 
                     primo_transactions.map((transaction) => (
                         <tr class="transaction-row ">
-                            <th scope="row">{transaction.reconcile_status}</th>
+                            <div>
+                            {transaction.reconcile_status == 'fail' ? null : <button type="button" class="btn btn-success btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            {transaction.reconcile_status == 'success' ? null : <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            </div>
                             <td class="col">
                               <Link to={"/transaction/" + transaction.recon_id} className="link">
                               {transaction.recon_id}
@@ -228,8 +231,8 @@ export default class PrimoTransactions extends Component {
                             <td class="col">{transaction.account.substring(0,8) + "..."}</td>
                             <td class="col">{transaction.counter_party}</td>
                             <td class="col">{transaction.settlement_date}</td>
-                            <td class="col">{transaction.trade_id}</td>
                             <td class="col">{transaction.status}</td>
+                            <td class="col">{transaction.trade_id}</td>
                             <td class="col">{transaction.settlement_price}</td>
                             <td class="col">{transaction.principle}</td>
                             <td class="col">{transaction.price_currency}</td>
