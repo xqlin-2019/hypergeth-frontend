@@ -1,6 +1,11 @@
 import axios from 'axios';
 import React, { Component } from "react";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import { Button} from 'react-bootstrap';
 import { Dropdown} from 'react-bootstrap';;
+
+
+
 
 
 export default class Upload extends Component {
@@ -9,7 +14,13 @@ export default class Upload extends Component {
         this.state = {
             open: false,
         };
+        //added for dropdown title
+        this.state = {
+          dropDownValue: "File type"
+        }
     }
+
+    
     toggle = () => {
         this.setState({ open: !this.state.open });
     }
@@ -22,9 +33,14 @@ export default class Upload extends Component {
     state = {
  
         // Initially, no file is selected
-        selectedFile: null
+        selectedFile: null,
       };
       
+      //On selecting dropdown option
+      changeValue(text) {
+        this.setState({dropDownValue: text})
+      }
+
       // On file select (from the pop up)
       onFileChange = event => {
       
@@ -37,14 +53,22 @@ export default class Upload extends Component {
       onFileUpload = () => {
       
         // Create an object of formData
-        const formData = new FormData();
+        const formData = new FormData();        
       
         // Update the formData object
-        formData.append(
-          "myFile",
-          this.state.selectedFile,
-          this.state.selectedFile.name
-        );
+        //Form validation for when user doesnt choose any file before clicking upload
+          if (this.selectedFile ==  null) {
+            alert("Please choose a file before clicking Upload!")
+          }
+          else {
+            formData.append(
+              "myFile",
+              this.state.selectedFile,
+              this.state.selectedFile.name
+            );
+          }
+        
+
       
         // Details of the uploaded file
         console.log(this.state.selectedFile);
@@ -81,8 +105,8 @@ export default class Upload extends Component {
           return (
             <div>
               <br />
-              <h4>Choose before Pressing the Upload button</h4>
             </div>
+            
           );
         }
       };
@@ -91,25 +115,18 @@ export default class Upload extends Component {
       
         return (
           <div>
-              <h3>
-                Please upload the relevant file!
-              </h3>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Dropdown Button
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">SGX</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">PRIMO</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <h4>Please choose a file before Pressing the Upload button</h4>
+              <DropdownButton id="dropdown-item-button" variant="success" title={this.state.dropDownValue} className="format"> 
+              <Dropdown.Item as="button"><div onClick={(e) => this.changeValue(e.target.textContent)}>SGX</div></Dropdown.Item>
+              <Dropdown.Item as="button"><div onClick={(e) => this.changeValue(e.target.textContent)}>PRIMO</div></Dropdown.Item>
+              </DropdownButton>
               <p></p>
               <div>
                   <input type="file" onChange={this.onFileChange} />
-                  <button class="btn-danger" onClick={this.onFileUpload}>
+                  {/* <button class="btn-danger" onClick={this.onFileUpload}>
                     Upload!
-                  </button>
+                  </button> */}
+                  <Button variant="outline-danger" onClick={this.onFileUpload}>Upload!</Button>{' '}
               </div>
             {this.fileData()}
           </div>
