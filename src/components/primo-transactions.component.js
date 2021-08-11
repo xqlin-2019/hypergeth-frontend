@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TransactionDataService from "../services/transaction.service";
 import { Link } from "react-router-dom";
 
 const primo_transactions = [
@@ -130,6 +130,7 @@ export default class PrimoTransactions extends Component {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
+    this.retrieveTransactions = this.retrieveTransactions.bind(this);
 
     this.state = {
       transactions: [],
@@ -137,7 +138,7 @@ export default class PrimoTransactions extends Component {
   }
 
   componentDidMount() {
-    this.retrieveRecords();
+    this.retrieveTransactions();
   }
 
   onChangeSearchTitle(e) {
@@ -148,13 +149,24 @@ export default class PrimoTransactions extends Component {
     });
   }
 
-  retrieveRecords() {
-    this.setState({transactions: primo_transactions});
+  retrieveTransactions() {
+    //this.setState({transactions: primo_transactions});
+    TransactionDataService.getAllPrimo()
+      .then(response => {
+        this.setState({
+          transactions: response.data
+        });
+        //console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  
   }
 
 
   searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    TransactionDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -202,40 +214,41 @@ export default class PrimoTransactions extends Component {
                 <th class="col">REUT</th>
                 <th class="col">Buy / Sell</th>
                 <th class="col">Account</th>
-                <th class="col">Counter Party</th>
+                {/* <th class="col">Counter Party</th>
                 <th class="col">Settlement Date</th>
                 <th class="col">Status</th>
-                <th class="col">Trade_ID</th>
+                <th class="col">Trade_ID</th> */}
                 <th class="col">Settlement Price</th>
-                <th class="col">Principle</th>
-                <th class="col">Price Currency</th>
+                {/* <th class="col">Principle</th>
+                <th class="col">Price Currency</th> */}
                 </tr>
             </thead>
             <tbody>
-                {primo_transactions && 
-                    primo_transactions.map((transaction) => (
+                {transactions && 
+                    transactions.map((transaction) => (
                         <tr class="transaction-row ">
                             <div>
-                            {transaction.reconcile_status == 'fail' ? null : <button type="button" class="btn btn-success btn-sm" id="status">{transaction.reconcile_status}</button>}
-                            {transaction.reconcile_status == 'success' ? null : <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            {transaction.Record.Status == 'pending' ? <button type="button" class="btn btn-warning btn-sm" id="status">{transaction.Record.Status}</button> : null}
+                            {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
+                            {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
                             <td class="col">
                               <Link to={"/transaction/" + transaction.recon_id} className="link">
                               {transaction.recon_id}
                               </Link>
                             </td>
-                            <td class="col">{transaction.quantity}</td>
-                            <td class="col">{transaction.execution_date}</td>
-                            <td class="col">{transaction.reut}</td>
-                            <td class="col">{transaction.buy_sell}</td>
-                            <td class="col">{transaction.account.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.counter_party}</td>
+                            <td class="col">{transaction.Record.Quantity}</td>
+                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.ISIN}</td>
+                            <td class="col">{transaction.Record.RT}</td>
+                            <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
+                            {/* <td class="col">{transaction.counter_party}</td>
                             <td class="col">{transaction.settlement_date}</td>
                             <td class="col">{transaction.status}</td>
-                            <td class="col">{transaction.trade_id}</td>
-                            <td class="col">{transaction.settlement_price}</td>
-                            <td class="col">{transaction.principle}</td>
-                            <td class="col">{transaction.price_currency}</td>
+                            <td class="col">{transaction.trade_id}</td> */}
+                            <td class="col">{transaction.Record.Settlement_price}</td>
+                            {/* <td class="col">{transaction.principle}</td>
+                            <td class="col">{transaction.price_currency}</td> */}
                         </tr> 
                     ))} 
             </tbody>

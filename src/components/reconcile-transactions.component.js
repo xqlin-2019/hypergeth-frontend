@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TransactionDataService from "../services/transaction.service";
 import { Link } from "react-router-dom";
 
 const reconcile_transactions = [
@@ -79,14 +79,17 @@ export default class ReconcileTransactions extends Component {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
+    this.retrieveTransactions = this.retrieveTransactions.bind(this);
+    this.onUpdateTransactionArray = this.onUpdateTransactionArray.bind(this);
 
     this.state = {
-      records: [],
+      transactions: [],
+      transactionArray: []
     };
   }
 
   componentDidMount() {
-    this.retrieveRecords();
+    this.retrieveTransactions();
   }
 
   onChangeSearchTitle(e) {
@@ -97,13 +100,29 @@ export default class ReconcileTransactions extends Component {
     });
   }
 
-  retrieveRecords() {
-    this.setState({records: reconcile_transactions});
+  onUpdateTransactionArray(array) {
+    this.setState({
+      transactionArray: array
+    });
+  }
+
+  retrieveTransactions() {
+    //this.setState({transactions: reconcile_transactions});
+    TransactionDataService.getAllReconcile()
+      .then(response => {
+        this.setState({
+          transactions: response.data
+        });
+        //console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
 
   searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    TransactionDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -116,8 +135,8 @@ export default class ReconcileTransactions extends Component {
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
-
+    const { searchTitle, transactions, transactionArray } = this.state;
+    let transactionArr;
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -155,25 +174,26 @@ export default class ReconcileTransactions extends Component {
                 </tr>
             </thead>
             <tbody>
-                {reconcile_transactions && 
-                    reconcile_transactions.map((transaction) => (
+                {transactions && 
+                    transactions.map((transaction) => (
                         <tr class="transaction-row ">
-                            {/* <th scope="row">{transaction.reconcile_status}</th> */}
-                            <div>
+                            {/* {transactionArr = transaction.Record.Recon_ID.split("_")} */}
+                            <th scope="row"><button type="button" class="btn btn-success btn-sm" id="status">Success</button></th>
+                            {/* <div>
                             {transaction.reconcile_status == 'fail' ? null : <button type="button" class="btn btn-success btn-sm" id="status">{transaction.reconcile_status}</button>}
                             {transaction.reconcile_status == 'success' ? null : <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.reconcile_status}</button>}
-                            </div>
+                            </div>  */}
                             <td class="col">
-                              <Link to={"/transaction/" + transaction.recon_id} className="link">
-                              {transaction.recon_id}
+                              <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
+                              {transaction.Record.Block_ID}
                               </Link>
                             </td>
-                            <td class="col">{transaction.buy_sell}</td>
-                            <td class="col">{transaction.account.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.isin}</td>
-                            <td class="col">{transaction.price}</td>
-                            <td class="col">{transaction.quantity}</td>
-                            <td class="col">{transaction.trade_date}</td>
+                            <td class="col">{transaction.Record.Recon_ID.split("_")[1]}</td>
+                            <td class="col">{transaction.Record.Recon_ID.split("_")[2].substring(0,8) + "..."}</td>
+                            <td class="col">{transaction.Record.Recon_ID.split("_")[0]}</td>
+                            <td class="col">{transaction.Record.Recon_ID.split("_")[3]}</td>
+                            <td class="col">{transaction.Record.Quantity}</td>
+                            <td class="col">{transaction.Record.Recon_ID.split("_")[4]}</td>
                         </tr> 
                     ))} 
             </tbody>

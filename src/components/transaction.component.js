@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TransactionDataService from "../services/transaction.service";
 import { Link } from "react-router-dom";
 
 const reconcile_transaction = {
@@ -126,21 +126,37 @@ export default class Transaction extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      transactions: [],
+      transaction: {
+        Block_ID: "",
+        Recon_ID: "",
+        Quantity: "",
+        sgx_list: "",
+        Primo_list: ""
+      },
     };
   }
 
   componentDidMount() {
-    this.retrieveTransactions();
+    this.getTransaction(this.props.match.params.id);
   }
 
-  retrieveTransactions() {
-    this.setState({transactions: reconcile_transaction});
+  getTransaction(id) {
+    // this.setState({transactions: reconcile_transaction});
+    TransactionDataService.getReconcile(id)
+      .then(response => {
+        this.setState({
+          transaction: response.data
+        });
+        //console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
 
   render() {
-    const { transactions } = this.state;
+    const { transaction } = this.state;
 
     return (
       <div className="list row">
@@ -153,43 +169,43 @@ export default class Transaction extends Component {
             <tbody>
               <tr>
                     <th scope="row">Account (CLINO):</th>
-                    <td class="col" colspan="3">{reconcile_transaction.account}</td>
+                    <td class="col" colspan="3">{transaction.Recon_ID.split("_")[2]}</td>
                 </tr> 
                 <tr>
                     <th scope="row">Cumulative Quantity:</th>
-                    <td class="col">{reconcile_transaction.quantity}</td>
+                    <td class="col">{transaction.Quantity}</td>
                     <th scope="row">Reconcile Status:</th>
-                    <td class="col">{reconcile_transaction.reconcile_status}</td>
+                    <td class="col">Successful</td>
                 </tr> 
                 <tr>
-                    <th scope="row">ISIN (REUT:</th>
-                    <td class="col">{reconcile_transaction.isin}</td>
+                    <th scope="row">ISIN (REUT):</th>
+                    <td class="col">{transaction.Recon_ID.split("_")[0]}</td>
                     <th scope="row">Buy/Sell (RT):</th>
-                    <td class="col">{reconcile_transaction.buy_sell}</td>
+                    <td class="col">{transaction.Recon_ID.split("_")[1]}</td>
                 </tr> 
                 <tr>
                     <th scope="row">Trade Date:</th>
-                    <td class="col">{reconcile_transaction.trade_date}</td>
+                    <td class="col">{transaction.Recon_ID.split("_")[4]}</td>
                     <th scope="row">Counter Party:</th>
-                    <td class="col">{reconcile_transaction.counter_party}</td>
+                    <td class="col"> - </td>
                 </tr> 
                 <tr>
                     <th scope="row">Settlement Date:</th>
                     <td class="col">{reconcile_transaction.settlement_date}</td>
                     <th scope="row">Status:</th>
-                    <td class="col">{reconcile_transaction.status}</td>
+                    <td class="col"> - </td>
                 </tr> 
                 <tr>
                     <th scope="row">Trade ID:</th>
                     <td class="col">{reconcile_transaction.trade_id}</td>
                     <th scope="row">Price:</th>
-                    <td class="col">{reconcile_transaction.price}</td>
+                    <td class="col">{transaction.Recon_ID.split("_")[3]}</td>
                 </tr> 
                 <tr>
-                    <th scope="row">New Amount:</th>
-                    <td class="col">{reconcile_transaction.net_amount}</td>
+                    <th scope="row">Net Amount:</th>
+                    <td class="col"> - </td>
                     <th scope="row">Pricing Currency:</th>
-                    <td class="col">{reconcile_transaction.price_currency}</td>
+                    <td class="col"> - </td>
                 </tr> 
             </tbody>
         </table>

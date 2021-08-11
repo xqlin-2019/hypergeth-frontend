@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import TransactionDataService from "../services/transaction.service";
 import { Link } from "react-router-dom";
 
 const sgx_transactions = [
@@ -60,12 +60,22 @@ export default class SgxTransactions extends Component {
   }
 
   retrieveRecords() {
-    this.setState({transactions: sgx_transactions});
+    // this.setState({transactions: sgx_transactions});
+    TransactionDataService.getAllSgx()
+      .then(response => {
+        this.setState({
+          transactions: response.data
+        });
+        //console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
 
   searchTitle() {
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    TransactionDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -117,24 +127,25 @@ export default class SgxTransactions extends Component {
                 </tr>
             </thead>
             <tbody>
-                {sgx_transactions && 
-                    sgx_transactions.map((transaction) => (
-                        <tr class="transaction-row ">
+                {transactions && 
+                    transactions.map((transaction) => (
+                      <tr class="transaction-row ">
                             <div>
-                            {transaction.reconcile_status == 'fail' ? null : <button type="button" class="btn btn-success btn-sm" id="status">{transaction.reconcile_status}</button>}
-                            {transaction.reconcile_status == 'success' ? null : <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.reconcile_status}</button>}
+                            {transaction.Record.Status == 'pending' ? <button type="button" class="btn btn-warning btn-sm" id="status">{transaction.Record.Status}</button> : null}
+                            {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
+                            {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
                             <td class="col">
                               <Link to={"/transaction/" + transaction.recon_id} className="link">
                               {transaction.recon_id}
                               </Link>
                             </td>
-                            <td class="col">{transaction.quantity}</td>
-                            <td class="col">{transaction.execution_date}</td>
-                            <td class="col">{transaction.isin}</td>
-                            <td class="col">{transaction.rt}</td>
-                            <td class="col">{transaction.clino.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.settlement_price}</td>
+                            <td class="col">{transaction.Record.Quantity}</td>
+                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.ISIN}</td>
+                            <td class="col">{transaction.Record.RT}</td>
+                            <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
+                            <td class="col">{transaction.Record.Settlement_price}</td>
                         </tr> 
                     ))} 
             </tbody>
