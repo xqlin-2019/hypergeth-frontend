@@ -136,8 +136,8 @@ export default class SgxTransactions extends Component {
                             {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
                             <td class="col">
-                              <Link to={"/transaction/" + transaction.recon_id} className="link">
-                              {transaction.recon_id}
+                              <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
+                              {transaction.Record.Block_ID}
                               </Link>
                             </td>
                             <td class="col">{transaction.Record.Quantity}</td>
