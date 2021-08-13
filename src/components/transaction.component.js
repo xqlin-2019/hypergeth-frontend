@@ -147,7 +147,7 @@ export default class Transaction extends Component {
         this.setState({
           transaction: response.data
         });
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -166,6 +166,7 @@ export default class Transaction extends Component {
                 <tr>
                 </tr>
             </thead>
+            {/* <h1>{transaction.sgx_list.split(',')}</h1> */}
             <tbody>
               <tr>
                     <th scope="row">Account (CLINO):</th>
@@ -260,15 +261,16 @@ export default class Transaction extends Component {
                 </tr>
             </thead>
             <tbody>
-                {sgx_transaction.transactions && 
-                    sgx_transaction.transactions.map((transaction) => (
+                {transaction.sgx_list.split(',') && 
+                    transaction.sgx_list.split(',').map((transaction) => (
                         <tr class="transaction-row ">
-                            <td class="col">{transaction.quantity}</td>
+                            {/* <td class="col">{transaction.quantity}</td>
                             <td class="col">{transaction.execution_date}</td>
                             <td class="col">{transaction.isin}</td>
                             <td class="col">{transaction.rt}</td>
                             <td class="col">{transaction.clino.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.settlement_price}</td>
+                            <td class="col">{transaction.settlement_price}</td> */}
+                            <td class="col">{transaction.split('_')[1]}</td>
                         </tr> 
                     ))} 
             </tbody>

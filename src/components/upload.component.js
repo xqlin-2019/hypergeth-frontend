@@ -91,6 +91,13 @@ export default class Upload extends Component {
             axios.get('http://44.197.32.99:3002/update_status_complex')
               .then(function (response) {
                 console.log(response.data);
+                
+                console.log("Updating Block ID for each individual transaction")
+                axios.get('http://44.197.32.99:3002/update_block_id_complex').then(
+                  function(response){
+                    console.log(response.data)
+                  }
+                )
           })
           })
 
