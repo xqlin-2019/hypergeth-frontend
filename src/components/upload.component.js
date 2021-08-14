@@ -75,14 +75,14 @@ export default class Upload extends Component {
             console.log(`this is the input ${this.state.dropDownValue.toLowerCase()}`)
             // // Request made to the backend api
             // // Send formData object
-            axios.post(`http://localhost:3002/upload_${this.state.dropDownValue.toLowerCase()}_complex`, formData)
+            axios.post(`http://44.197.32.99:3002/upload_${this.state.dropDownValue.toLowerCase()}_complex`, formData)
               .then(function (response) {
               console.log(response.data)});
           }  
       };
 
       onReconcile = () => {
-        axios.get('http://localhost:3002/reconcile_orchestrate').then(
+        axios.get('http://44.197.32.99:3002/reconcile_orchestrate').then(
           function(response){
             console.log(response.data)
           }
