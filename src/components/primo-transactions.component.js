@@ -235,7 +235,7 @@ export default class PrimoTransactions extends Component {
                             {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
                             <td class="col">
-                              <Link to={"/transaction/" + transaction.Block_ID} className="link">
+                              <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
                               {transaction.Record.Block_ID}
                               </Link>
                             </td>

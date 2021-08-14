@@ -170,7 +170,7 @@ export default class ReconcileTransactions extends Component {
                 <th class="col">ISIN</th>
                 <th class="col">Price</th>
                 <th class="col">Cumulative Quanty</th>
-                <th class="col">Reconcile Date</th>
+                {/* <th class="col">Reconcile Date</th> */}
                 </tr>
             </thead>
             <tbody>
@@ -189,7 +189,7 @@ export default class ReconcileTransactions extends Component {
                               </Link>
                             </td>
                             <td class="col">{transaction.Record.Recon_ID.split("_")[1]}</td>
-                            <td class="col">{transaction.Record.Recon_ID.split("_")[2].substring(0,8) + "..."}</td>
+                            {/* <td class="col">{transaction.Record.Recon_ID.split("_")[2].substring(0,8) + "..."}</td> */}
                             <td class="col">{transaction.Record.Recon_ID.split("_")[0]}</td>
                             <td class="col">{transaction.Record.Recon_ID.split("_")[3]}</td>
                             <td class="col">{transaction.Record.Quantity}</td>

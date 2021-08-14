@@ -82,27 +82,29 @@ export default class Upload extends Component {
       };
 
       onReconcile = () => {
-        console.log("Creating reconcile blocks ...")
-        axios.get('http://localhost:3002/create_reconcile_complex')
-          .then(function (response) {
-            console.log(response.data);
+        axios.get('http://localhost:3002/reconcile_orchestrate').then(
+          function(response){
+            console.log(response.data)
+          }
+        )
+        // console.log("Creating reconcile blocks ...")
+        // axios.get('http://localhost:3002/create_reconcile_complex')
+        //   .then(function (response) {
+        //     console.log(response.data);
             
-            console.log("Updating reconcile status ...")
-            axios.get('http://localhost:3002/update_status_complex')
-              .then(function (response) {
-                console.log(response.data);
+        //     console.log("Updating reconcile status ...")
+        //     axios.get('http://localhost:3002/update_status_complex')
+        //       .then(function (response) {
+        //         console.log(response.data);
                 
-                console.log("Updating Block ID for each individual transaction")
-                axios.get('http://localhost:3002/update_block_id_complex').then(
-                  function(response){
-                    console.log(response.data)
-                  }
-                )
-          })
-          })
-
-        
-          
+        //         console.log("Updating Block ID for each individual transaction")
+        //         axios.get('http://localhost:3002/update_block_id_complex').then(
+        //           function(response){
+        //             console.log(response.data)
+        //           }
+        //         )
+        //   })
+        //   })    
       };
       
       // File content to be displayed after
