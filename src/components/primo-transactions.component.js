@@ -156,7 +156,7 @@ export default class PrimoTransactions extends Component {
         this.setState({
           transactions: response.data
         });
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -207,6 +207,7 @@ export default class PrimoTransactions extends Component {
         <table class="table table text-center table-image">
             <thead>
                 <tr>
+                <th class="col">ID</th>
                 <th class="col">Status</th>
                 <th class="col">Recon ID</th>
                 <th class="col">Quantity</th>
@@ -214,19 +215,20 @@ export default class PrimoTransactions extends Component {
                 <th class="col">REUT</th>
                 <th class="col">Buy / Sell</th>
                 <th class="col">Account</th>
-                {/* <th class="col">Counter Party</th>
+                <th class="col">Counter Party</th>
                 <th class="col">Settlement Date</th>
                 <th class="col">Status</th>
-                <th class="col">Trade_ID</th> */}
+                <th class="col">Trade_ID</th>
                 <th class="col">Settlement Price</th>
-                {/* <th class="col">Principle</th>
-                <th class="col">Price Currency</th> */}
+                <th class="col">Principal</th>
+                <th class="col">Price Currency</th>
                 </tr>
             </thead>
             <tbody>
                 {transactions && 
                     transactions.map((transaction) => (
                         <tr class="transaction-row ">
+                          <td class="col">{transaction.Record.ID}</td>
                             <div>
                             {transaction.Record.Status == 'pending' ? <button type="button" class="btn btn-warning btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
@@ -242,13 +244,13 @@ export default class PrimoTransactions extends Component {
                             <td class="col">{transaction.Record.ISIN}</td>
                             <td class="col">{transaction.Record.RT}</td>
                             <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
-                            {/* <td class="col">{transaction.counter_party}</td>
-                            <td class="col">{transaction.settlement_date}</td>
-                            <td class="col">{transaction.status}</td>
-                            <td class="col">{transaction.trade_id}</td> */}
+                            <td class="col">{transaction.Record.Counterparty}</td>
+                            <td class="col">{transaction.Record.Settlement_Date}</td>
+                            <td class="col">{transaction.Record.Alpha_status}</td>
+                            <td class="col">{transaction.Record.Trade_ID}</td>
                             <td class="col">{transaction.Record.Settlement_price}</td>
-                            {/* <td class="col">{transaction.principle}</td>
-                            <td class="col">{transaction.price_currency}</td> */}
+                            <td class="col">{transaction.Record.Principal}</td>
+                            <td class="col">{transaction.Record.Pricing_Currency}</td>
                         </tr> 
                     ))} 
             </tbody>
