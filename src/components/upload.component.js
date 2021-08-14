@@ -75,7 +75,7 @@ export default class Upload extends Component {
             console.log(`this is the input ${this.state.dropDownValue.toLowerCase()}`)
             // // Request made to the backend api
             // // Send formData object
-            axios.post(`http://44.197.32.99:3002/upload_${this.state.dropDownValue.toLowerCase()}_complex`, formData)
+            axios.post(`http://localhost:3002/upload_${this.state.dropDownValue.toLowerCase()}_complex`, formData)
               .then(function (response) {
               console.log(response.data)});
           }  
@@ -83,17 +83,17 @@ export default class Upload extends Component {
 
       onReconcile = () => {
         console.log("Creating reconcile blocks ...")
-        axios.get('http://44.197.32.99:3002/create_reconcile_complex')
+        axios.get('http://localhost:3002/create_reconcile_complex')
           .then(function (response) {
             console.log(response.data);
             
             console.log("Updating reconcile status ...")
-            axios.get('http://44.197.32.99:3002/update_status_complex')
+            axios.get('http://localhost:3002/update_status_complex')
               .then(function (response) {
                 console.log(response.data);
                 
                 console.log("Updating Block ID for each individual transaction")
-                axios.get('http://44.197.32.99:3002/update_block_id_complex').then(
+                axios.get('http://localhost:3002/update_block_id_complex').then(
                   function(response){
                     console.log(response.data)
                   }

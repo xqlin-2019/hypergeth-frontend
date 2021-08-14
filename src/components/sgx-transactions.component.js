@@ -116,6 +116,7 @@ export default class SgxTransactions extends Component {
         <table class="table table text-center table-image">
             <thead>
                 <tr>
+                <th class="col">ID</th>
                 <th class="col">Status</th>
                 <th class="col">Recon ID</th>
                 <th class="col">Quantity</th>
@@ -130,6 +131,7 @@ export default class SgxTransactions extends Component {
                 {transactions && 
                     transactions.map((transaction) => (
                       <tr class="transaction-row ">
+                            <td class="col">{transaction.Record.ID}</td>
                             <div>
                             {transaction.Record.Status == 'pending' ? <button type="button" class="btn btn-warning btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
