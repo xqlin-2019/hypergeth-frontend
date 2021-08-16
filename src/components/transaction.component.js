@@ -278,7 +278,6 @@ export default class Transaction extends Component {
                             <td class="col">{transaction.Recon_ID.split("_")[0]}</td>
                             <td class="col">{transaction.Recon_ID.split("_")[1]}</td>
                             <td class="col">{transaction.Recon_ID.split("_")[2]}</td>
-                            <td class="col">{transaction.Recon_ID.split("_")[10]}</td>
                             <td class="col">{transaction.Recon_ID.split("_")[3]}</td>
                         </tr> 
                     ))} 
