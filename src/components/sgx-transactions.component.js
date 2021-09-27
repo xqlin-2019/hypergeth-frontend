@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TransactionDataService from "../services/transaction.service";
+import TransactionDataService from "../services/transaction.service_3002";
 import { Link } from "react-router-dom";
 
 const sgx_transactions = [
