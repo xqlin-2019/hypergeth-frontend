@@ -38,10 +38,10 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/home"]} component={ReconcileTransactions} />
+            {/* <Route exact path={["/", "/home"]} component={ReconcileTransactions} /> */}
             <Route exact path="/primo" component={PrimoTransactions} />
             <Route exact path="/sgx" component={SgxTransactions} />
-            <Route exact path="/reconciliation" component={Upload} />
+            <Route exact path={["/", "/home","/reconciliation"]} component={Upload} />
             <Route path="/transaction/:id" component={Transaction} />
           </Switch>
         </div>
