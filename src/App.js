@@ -8,6 +8,11 @@ import PrimoTransactions from "./components/primo-transactions.component";
 import SgxTransactions from "./components/sgx-transactions.component";
 import Transaction from "./components/transaction.component";
 import Upload from "./components/upload.component";
+import FailedSgxTransactions from "./components/fail-sgx-transactions.component";
+import FailedPrimoTransactions from "./components/fail-primo-transactions.component";
+import SuccessSgxTransactions from "./components/success-sgx-transactions.component";
+import SuccessPrimoTransactions from "./components/success-primo-transactions.component";
+
 
 class App extends Component {
   render() {
@@ -29,8 +34,23 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/reconciliation"} className="nav-link">
-                RECONCILIATION
+              <Link to={"/sgx_fail"} className="nav-link">
+                FAILED SGX
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/sgx_success"} className="nav-link">
+                SUCCESS SGX
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/primo_fail"} className="nav-link">
+                FAILED PRIMO
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/primo_success"} className="nav-link">
+                SUCCESS PRIMO
               </Link>
             </li>
           </div>
@@ -41,7 +61,11 @@ class App extends Component {
             {/* <Route exact path={["/", "/home"]} component={ReconcileTransactions} /> */}
             <Route exact path="/primo" component={PrimoTransactions} />
             <Route exact path="/sgx" component={SgxTransactions} />
-            <Route exact path={["/", "/home","/reconciliation"]} component={Upload} />
+            <Route exact path="/sgx_fail" component={FailedSgxTransactions} />
+            <Route exact path="/sgx_success" component={SuccessSgxTransactions} />
+            <Route exact path="/primo_fail" component={FailedPrimoTransactions} />
+            <Route exact path="/primo_success" component={SuccessPrimoTransactions} />
+            <Route exact path={["/", "/home"]} component={Upload} />
             <Route path="/transaction/:id" component={Transaction} />
           </Switch>
         </div>

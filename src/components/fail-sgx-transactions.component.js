@@ -2,40 +2,6 @@ import React, { Component } from "react";
 import TransactionDataService from "../services/transaction.service";
 import { Link } from "react-router-dom";
 
-const sgx_transactions = [
-    {
-        recon_id:1,
-        reconcile_status: "success",
-        quantity: 100,
-        execution_date: "210719",
-        isin: "SG2F48989824",
-        rt: "B",
-        clino:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-        settlement_price:0.265,
-    },
-    {
-      recon_id:3,
-        reconcile_status: "fail",
-        quantity: 80,
-        execution_date: "210719",
-        isin: "SG2F48989824",
-        rt: "B",
-        clino:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-        settlement_price:0.265,
-    },
-    {
-      recon_id:4,
-      reconcile_status: "success",
-      quantity: 100,
-      execution_date: "210719",
-      isin: "SG2F48989824",
-      rt: "B",
-      clino:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-      settlement_price:0.265,
-  }
-]
-
-
 export default class SgxTransactions extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +27,7 @@ export default class SgxTransactions extends Component {
 
   retrieveRecords() {
     // this.setState({transactions: sgx_transactions});
-    TransactionDataService.getAllSgx()
+    TransactionDataService.getFailSgx()
       .then(response => {
         this.setState({
           transactions: response.data

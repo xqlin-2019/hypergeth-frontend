@@ -183,33 +183,13 @@ export default class PrimoTransactions extends Component {
 
     return (
       <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchTitle}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
         <h1>PRIMO Transactions</h1>
         <table class="table table text-center table-image">
             <thead>
                 <tr>
                 <th class="col">ID</th>
                 <th class="col">Status</th>
-                <th class="col">Recon ID</th>
+                {/* <th class="col">Recon ID</th> */}
                 <th class="col">Quantity</th>
                 <th class="col">Execution Date</th>
                 <th class="col">REUT</th>
@@ -234,11 +214,11 @@ export default class PrimoTransactions extends Component {
                             {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
-                            <td class="col">
+                            {/* <td class="col">
                               <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
                               {transaction.Record.Block_ID}
                               </Link>
-                            </td>
+                            </td> */}
                             <td class="col">{transaction.Record.Quantity}</td>
                             <td class="col">{transaction.Record.Execution_Date}</td>
                             <td class="col">{transaction.Record.ISIN}</td>
