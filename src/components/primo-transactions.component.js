@@ -209,7 +209,7 @@ export default class PrimoTransactions extends Component {
                 <tr>
                 <th class="col">ID</th>
                 <th class="col">Status</th>
-                {/* <th class="col">Recon ID</th> */}
+                <th class="col">Recon ID</th>
                 <th class="col">Quantity</th>
                 <th class="col">Execution Date</th>
                 <th class="col">REUT</th>
@@ -234,23 +234,23 @@ export default class PrimoTransactions extends Component {
                             {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
-                            {/* <td class="col">
+                            <td class="col">
                               <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
                               {transaction.Record.Block_ID}
                               </Link>
-                            </td> */}
+                            </td>
                             <td class="col">{transaction.Record.Quantity}</td>
-                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.Execution_Date}</td>
                             <td class="col">{transaction.Record.ISIN}</td>
                             <td class="col">{transaction.Record.RT}</td>
                             <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.Record.Counterparty}</td>
-                            <td class="col">{transaction.Record.Settlement_Date}</td>
+                            <td class="col">{transaction.Record.COUNTERPARTY}</td>
+                            <td class="col">{transaction.Record.SETTLEMENT_DATE}</td>
                             <td class="col">{transaction.Record.Alpha_status}</td>
-                            <td class="col">{transaction.Record.Trade_ID}</td>
+                            <td class="col">{transaction.Record.TRADE_ID}</td>
                             <td class="col">{transaction.Record.Settlement_price}</td>
-                            <td class="col">{transaction.Record.Principal}</td>
-                            <td class="col">{transaction.Record.Pricing_Currency}</td>
+                            <td class="col">{transaction.Record.PRINCIPAL}</td>
+                            <td class="col">{transaction.Record.PRICING_CURRENCY}</td>
                         </tr> 
                     ))} 
             </tbody>

@@ -66,7 +66,7 @@ export default class SgxTransactions extends Component {
         this.setState({
           transactions: response.data
         });
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -118,7 +118,6 @@ export default class SgxTransactions extends Component {
                 <tr>
                 <th class="col">ID</th>
                 <th class="col">Status</th>
-                {/* <th class="col">Recon ID</th> */}
                 <th class="col">Quantity</th>
                 <th class="col">Execution Date</th>
                 <th class="col">ISIN</th>
@@ -137,13 +136,8 @@ export default class SgxTransactions extends Component {
                             {transaction.Record.Status == 'fail' ?  <button type="button" class="btn btn-danger btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             {transaction.Record.Status == 'success' ? <button type="button" class="btn btn-success btn-sm" id="status">{transaction.Record.Status}</button> : null}
                             </div>
-                            {/* <td class="col">
-                              <Link to={"/transaction/" + transaction.Record.Block_ID} className="link">
-                              {transaction.Record.Block_ID}
-                              </Link>
-                            </td> */}
                             <td class="col">{transaction.Record.Quantity}</td>
-                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.Execution_Date}</td>
                             <td class="col">{transaction.Record.ISIN}</td>
                             <td class="col">{transaction.Record.RT}</td>
                             <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
