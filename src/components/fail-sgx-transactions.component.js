@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TransactionDataService from "../services/transaction.service_3000";
 import { Link } from "react-router-dom";
+import CsvDownload from 'react-json-to-csv'
 
 
 export default class SgxTransactions extends Component {
@@ -28,7 +29,7 @@ export default class SgxTransactions extends Component {
 
   retrieveRecords() {
     // this.setState({transactions: sgx_transactions});
-    TransactionDataService.getAllSgx()
+    TransactionDataService.getAllSgxFailed()
       .then(response => {
         this.setState({
           transactions: response.data
@@ -119,6 +120,9 @@ export default class SgxTransactions extends Component {
                     ))} 
             </tbody>
         </table>
+
+        <CsvDownload data={transactions} filename = 'failed_sgx.csv' />
+
       </div>
     );
   }

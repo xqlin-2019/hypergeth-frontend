@@ -5,12 +5,20 @@ class TransactionDataService {
     return http.get("/read_primo");
   }
 
+  getAllPrimoFailed() {
+    return http.get("/read_primo_fail");
+  }
+
   getPrimo(id) {
     return http.get(`/one_primo/${id}`);
   }
 
   getAllSgx() {
     return http.get("/read_sgx");
+  }
+
+  getAllSgxFailed() {
+    return http.get("/read_sgx_fail");
   }
 
   getSgx(id) {
