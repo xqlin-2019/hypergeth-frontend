@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TransactionDataService from "../services/transaction.service_3002";
+import TransactionDataService from "../services/transaction.service_3000";
 import { Link } from "react-router-dom";
 
 const sgx_transactions = [
@@ -143,7 +143,7 @@ export default class SgxTransactions extends Component {
                               </Link>
                             </td>
                             <td class="col">{transaction.Record.Quantity}</td>
-                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.Execution_Date}</td>
                             <td class="col">{transaction.Record.ISIN}</td>
                             <td class="col">{transaction.Record.RT}</td>
                             <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>

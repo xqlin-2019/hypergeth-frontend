@@ -1,129 +1,6 @@
 import React, { Component } from "react";
-import TransactionDataService from "../services/transaction.service_3002";
+import TransactionDataService from "../services/transaction.service_3000";
 import { Link } from "react-router-dom";
-
-const primo_transactions = [
-    {
-        recon_id:1,
-        reconcile_status: "success",
-        quantity: 20,
-        execution_date: "210719",
-        reut: "SG2F48989824",
-        buy_sell: "B",
-        account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-        counter_party: "Q7SGX",
-        settlement_date:"20210722",
-        status:"A",
-        trade_id:"106",
-        settlement_price:0.265,
-        principle:26.5,
-        price_currency:"SGD"
-
-    },
-    {
-        recon_id:1,
-        reconcile_status: "success",
-        quantity: 20,
-        execution_date: "210719",
-        reut: "SG2F48989824",
-        buy_sell: "B",
-        account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-        counter_party: "Q7SGX",
-        settlement_date:"20210722",
-        status:"A",
-        trade_id:"106",
-        settlement_price:0.265,
-        principle:26.5,
-        price_currency:"SGD"
-
-    },
-    {
-      recon_id:1,
-      reconcile_status: "success",
-      quantity: 20,
-      execution_date: "210719",
-      reut: "SG2F48989824",
-      buy_sell: "B",
-      account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-      counter_party: "Q7SGX",
-      settlement_date:"20210722",
-      status:"A",
-      trade_id:"106",
-      settlement_price:0.265,
-      principle:26.5,
-      price_currency:"SGD"
-
-  },
-  {
-    recon_id:1,
-    reconcile_status: "success",
-    quantity: 20,
-    execution_date: "210719",
-    reut: "SG2F48989824",
-    buy_sell: "B",
-    account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-    counter_party: "Q7SGX",
-    settlement_date:"20210722",
-    status:"A",
-    trade_id:"106",
-    settlement_price:0.265,
-    principle:26.5,
-    price_currency:"SGD"
-
-},
-{
-    recon_id:1,
-    reconcile_status: "success",
-    quantity: 20,
-    execution_date: "210719",
-    reut: "SG2F48989824",
-    buy_sell: "B",
-    account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-    counter_party: "Q7SGX",
-    settlement_date:"20210722",
-    status:"A",
-    trade_id:"106",
-    settlement_price:0.265,
-    principle:26.5,
-    price_currency:"SGD"
-
-},
-{
-  recon_id:2,
-  reconcile_status: "fail",
-  quantity: 60,
-  execution_date: "210719",
-  reut: "SG2F48989824",
-  buy_sell: "B",
-  account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-  counter_party: "Q7SGX",
-  settlement_date:"20210722",
-  status:"A",
-  trade_id:"106",
-  settlement_price:0.265,
-  principle:26.5,
-  price_currency:"SGD"
-
-},
-{
-  recon_id:3,
-  reconcile_status: "success",
-  quantity: 100,
-  execution_date: "210719",
-  reut: "SG2F48989824",
-  buy_sell: "B",
-  account:"765aa1a943a5aa1d0cae8b5c97b68a17785179e6ef13aaaf1b99b78c2387dd09",
-  counter_party: "Q7SGX",
-  settlement_date:"20210722",
-  status:"A",
-  trade_id:"106",
-  settlement_price:0.265,
-  principle:26.5,
-  price_currency:"SGD"
-
-}
-]
-
 
 export default class PrimoTransactions extends Component {
   constructor(props) {
@@ -183,26 +60,7 @@ export default class PrimoTransactions extends Component {
 
     return (
       <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchTitle}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
+        
         <h1>PRIMO Transactions</h1>
         <table class="table table text-center table-image">
             <thead>
@@ -217,7 +75,7 @@ export default class PrimoTransactions extends Component {
                 <th class="col">Account</th>
                 <th class="col">Counter Party</th>
                 <th class="col">Settlement Date</th>
-                <th class="col">Status</th>
+                <th class="col">Alpha status</th>
                 <th class="col">Trade_ID</th>
                 <th class="col">Settlement Price</th>
                 <th class="col">Principal</th>
@@ -240,17 +98,17 @@ export default class PrimoTransactions extends Component {
                               </Link>
                             </td>
                             <td class="col">{transaction.Record.Quantity}</td>
-                            <td class="col">{transaction.Record.Execution_date}</td>
+                            <td class="col">{transaction.Record.Execution_Date}</td>
                             <td class="col">{transaction.Record.ISIN}</td>
                             <td class="col">{transaction.Record.RT}</td>
                             <td class="col">{transaction.Record.CLINO.substring(0,8) + "..."}</td>
-                            <td class="col">{transaction.Record.Counterparty}</td>
-                            <td class="col">{transaction.Record.Settlement_Date}</td>
+                            <td class="col">{transaction.Record.COUNTERPARTY}</td>
+                            <td class="col">{transaction.Record.SETTLEMENT_DATE}</td>
                             <td class="col">{transaction.Record.Alpha_status}</td>
-                            <td class="col">{transaction.Record.Trade_ID}</td>
+                            <td class="col">{transaction.Record.TRADE_ID}</td>
                             <td class="col">{transaction.Record.Settlement_price}</td>
-                            <td class="col">{transaction.Record.Principal}</td>
-                            <td class="col">{transaction.Record.Pricing_Currency}</td>
+                            <td class="col">{transaction.Record.PRINCIPAL}</td>
+                            <td class="col">{transaction.Record.PRICING_CURRENCY}</td>
                         </tr> 
                     ))} 
             </tbody>
